@@ -33,7 +33,7 @@ node {
     checkout scm
   }
   stage('SonarQube Analysis') {
-    def mvn = tool 'Default Maven';
+    def mvn = tool '/opt/maven';
     withSonarQubeEnv() {
       sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=devops -Dsonar.projectName='devops'"
     }
