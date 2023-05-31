@@ -1,4 +1,4 @@
-node {
+/*node {
   
     stage('Clone') {
         git credentialsId: 'jenkins', url: 'https://github.com/EmnaNet/projet_j2ee.git'
@@ -26,4 +26,16 @@ node {
         deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://localhost:8080/')], contextPath: null, war: '**/*.war'
     
 
+}*/
+
+node {
+  stage('SCM') {
+    checkout scm
+  }
+  stage('SonarQube Analysis') {
+    def mvn = tool 'Default Maven';
+    withSonarQubeEnv() {
+      sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=devops -Dsonar.projectName='devops'"
+    }
+  }
 }
