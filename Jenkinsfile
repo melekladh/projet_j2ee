@@ -26,7 +26,8 @@
         deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://localhost:8080/')], contextPath: null, war: '**/*.war'
     
 
-}*/
+}
+*/
 
 node {
   stage('SCM') {
